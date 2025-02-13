@@ -1,1 +1,18 @@
-<p>book-details works!</p>
+<div class="container mt-4">
+    <div *ngIf="book; else notFound">
+      <h2>{{ book.title }}</h2>
+      <p><strong>Author:</strong> {{ book.author }}</p>
+      <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+      <p><strong>Publication Year:</strong> {{ book.publicationYear }}</p>
+      <p><strong>Description:</strong> {{ book.description }}</p>
+      <a class="btn btn-primary mt-3" routerLink="/">Back to Book List</a>
+    </div>
+  
+    <ng-template #notFound>
+      <div class="alert alert-danger">
+        <p>{{ errorMessage }}</p>
+      </div>
+      <a class="btn btn-secondary" routerLink="/">Go Back</a>
+    </ng-template>
+  </div>
+  
