@@ -1,1 +1,9 @@
-<p>book-list works!</p>
+<div class="container mt-4">
+    <h2>Library Books</h2>
+    <app-search-bar (searchEvent)="onSearch($event)"></app-search-bar>
+    <ul class="list-group">
+      <li *ngFor="let book of books" class="list-group-item">
+        <a [routerLink]="['/books', book.id]">{{ book.title }} by {{ book.author }}</a>
+      </li>
+    </ul>
+  </div>
