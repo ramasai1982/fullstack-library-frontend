@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Book } from '../models/book.model';
 
 @Injectable({
@@ -12,7 +12,9 @@ export class BookService {
   constructor(private http: HttpClient) {}
 
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.apiUrl);
+    return this.http.get<Book[]>(this.apiUrl).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getBookById(id: number): Observable<Book> {
@@ -25,6 +27,17 @@ export class BookService {
     if (title && author) searchUrl += `&author=${author}`;
     if (author && !title) searchUrl += `?author=${author}`;
     return this.http.get<Book[]>(searchUrl);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMsg = 'An unknown error occurred';
+    if (error.error instanceof ErrorEvent) {
+      errorMsg = `Client-side error: ${error.error.message}`;
+    } else {
+      errorMsg = `Server error (${error.status}): ${error.message}`;
+    }
+    console.error(errorMsg);
+    return throwError(() => new Error(errorMsg));
   }
 }
 
