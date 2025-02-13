@@ -4,14 +4,20 @@
 
     <app-search-bar 
         (searchEvent)="onSearch($event)">
-    </app-search-bar>
+    </app-search-bar><br><br>
+
+    <div class="alert alert-danger" 
+      role="alert" 
+      *ngIf="books.length==0">
+        No book available
+    </div>
 
     <ul class="list-group">
-      <li *ngFor="let book of books" class="list-group-item">
+      <div *ngFor="let book of books; let i = index" class="list-group-item">
         <a [routerLink]="['/books', book.id]">
-            {{ book.title }} by {{ book.author }}
+            {{i+1}} - {{ book.title }} by {{ book.author }} - {{book.publicationYear}}
         </a>
-      </li>
+    </div>
     </ul>
 
   </div>
