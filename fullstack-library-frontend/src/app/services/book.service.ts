@@ -22,7 +22,8 @@ export class BookService {
   searchBooks(title?: string, author?: string): Observable<Book[]> {
     let searchUrl = `${this.apiUrl}/search`;
     if (title) searchUrl += `?title=${title}`;
-    if (author) searchUrl += `&author=${author}`;
+    if (title && author) searchUrl += `&author=${author}`;
+    if (author && !title) searchUrl += `?author=${author}`;
     return this.http.get<Book[]>(searchUrl);
   }
 }
