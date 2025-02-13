@@ -2,22 +2,39 @@
 
     <h2>Library Books</h2>
 
+
+    <!-- Search Bar-->
     <app-search-bar 
         (searchEvent)="onSearch($event)">
     </app-search-bar><br><br>
 
-    <div class="alert alert-danger" 
-      role="alert" 
-      *ngIf="books.length==0">
-        No book available
-    </div>
+    <div class="list-group">
 
-    <ul class="list-group">
-      <div *ngFor="let book of books; let i = index" class="list-group-item">
-        <a [routerLink]="['/books', book.id]">
-            {{i+1}} - {{ book.title }} by {{ book.author }} - {{book.publicationYear}}
-        </a>
+        <!-- Show books if available -->
+        <div *ngIf="books.length>0; else notFound">
+            <div *ngFor="let book of books; let i = index" class="list-group-item">
+                <a [routerLink]="['/books', book.id]">
+                    {{i+1}} - {{ book.title }} by {{ book.author }} - {{book.publicationYear}}
+                </a>
+            </div>
+        </div>
+
+        <!-- No books available -->
+        <ng-template #notFound>
+            <div class="alert alert-danger">
+
+                <p>
+                    {{displayMessageNotFound}}
+                </p>
+
+                <button 
+                    class="btn btn-primary" 
+                    (click)="resetSearch()">
+                        Reset Search
+                </button>
+            </div>
+        </ng-template>
+        
     </div>
-    </ul>
 
   </div>
