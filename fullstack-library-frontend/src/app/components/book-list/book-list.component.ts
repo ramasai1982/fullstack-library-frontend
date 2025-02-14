@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BookService } from '../../services/book.service';
-import { Book } from '../../models/book.model';
+import { Book } from '../../models/book';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class BookListComponent implements OnInit, OnDestroy {
   
   books: Book[] = []; // Holds the list of books fetched from the backend
-  displayMessageNotFound!: string; // Stores a message when no books are found
+  displayMessageNotFound: string = "No books available in the library."; // Stores a message when no books are found
 
   private ngUnsubscribe = new Subject<void>(); // Used to manage subscription cleanup and prevent memory leaks
 
@@ -37,7 +37,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.bookService.getBooks()
       .pipe(takeUntil(this.ngUnsubscribe)) // Automatically unsubscribe on component destruction
       .subscribe(
-        (books) => {
+        (books) => { 
           this.books = books;
         },
         (error: HttpErrorResponse) => {
@@ -63,7 +63,7 @@ export class BookListComponent implements OnInit, OnDestroy {
           if (this.books.length === 0) {
             const authorText = searchParams.author ? `author ${searchParams.author}` : "";
             const titleText = searchParams.title ? `title ${searchParams.title}` : "";
-          
+
             if (authorText && titleText) {
               this.displayMessageNotFound = `No book found for your query with ${authorText} and ${titleText}.`;
             } else if (authorText || titleText) {

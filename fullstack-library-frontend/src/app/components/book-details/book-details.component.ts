@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../services/book.service';
-import { Book } from '../../models/book.model';
+import { Book } from '../../models/book';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
