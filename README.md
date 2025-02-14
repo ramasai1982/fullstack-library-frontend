@@ -43,4 +43,4 @@ fullstack-library-frontend/
 │   │   ├── environment.ts  # API Configuration
 │── angular.json
 │── package.json
-│── README.md
+README.md
