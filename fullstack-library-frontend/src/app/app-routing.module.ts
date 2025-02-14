@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookListComponent } from './components/book-list/book-list.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: 'books', component: BookListComponent },
@@ -10,7 +11,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 
