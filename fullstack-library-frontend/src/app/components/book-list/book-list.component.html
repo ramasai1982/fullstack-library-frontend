@@ -5,7 +5,9 @@
 
     <!-- Search Bar-->
     <app-search-bar 
-        (searchEvent)="onSearch($event)">
+        (searchEvent)="onSearch($event)"
+        (resetEvent)="loadAllBooks()">
+
     </app-search-bar><br><br>
 
     <div class="list-group">
