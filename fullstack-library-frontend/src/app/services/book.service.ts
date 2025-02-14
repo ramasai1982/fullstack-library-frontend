@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Book } from '../models/book.model';
+import { Book } from '../models/book';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,7 @@ export class BookService {
   constructor(private http: HttpClient) {}
 
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.apiUrl).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<Book[]>(this.apiUrl);
   }
 
   getBookById(id: number): Observable<Book> {
